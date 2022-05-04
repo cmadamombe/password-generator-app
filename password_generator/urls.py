@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.views.generic import TemplateView
+
+# project level urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), # admin urls
+    path("", TemplateView.as_view(template_name="generator/home.html"), name="home"), #home page urls 
+    path("password/", include("generator.urls", namespace="password")), # password generator url which is sitting in the generator app urls
 ]
